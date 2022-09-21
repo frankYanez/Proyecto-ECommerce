@@ -1,0 +1,17 @@
+@import 'components/header';
+@import 'components/main';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+};
+
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+.container {
+    max-width: 80%;
+    margin: auto;
+}

@@ -1,0 +1,37 @@
+.img-card {
+    width: 100%;
+    margin: auto;
+};
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+};
+
+.selectProductos {
+    text-align: center;
+};
+
+.card{
+    box-shadow: 21px 14px 23px 13px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    max-width: 400px;
+    padding: 20px;
+    
+};
+
+.button{
+    padding: 10px;
+    background-color:rgb(150,2, 0);
+}
+h4 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 30px;
+    text-align: center
+};
+
+h5, h6 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px
+}

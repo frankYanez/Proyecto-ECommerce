@@ -1,0 +1,54 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+};
+
+.header_text{
+    margin: auto;
+};
+
+.contenido_header{
+    display: flex;
+    flex-direction: column;
+    gap: 100px 0;
+};
+
+h1 {
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 200px;
+};
+
+.link {
+    color: black;
+    font-size: 30px;
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+}
+
+.link:hover{
+    text-decoration: underline rgb(150, 2, 0);
+}
+
+p{
+    font-family: 'Nunito', sans-serif;
+    font-size: 50px;
+};
+
+span{
+    font-weight: bold;
+    background-color: rgb(150, 2, 0);
+}
+
+.header_text {
+    right: 50px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.navbar a {
+    margin-right: 20px;
+}
