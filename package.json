@@ -7,5 +7,13 @@
   },
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frankYanez/Proyecto-ECommerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/frankYanez/Proyecto-ECommerce/issues"
+  },
+  "homepage": "https://github.com/frankYanez/Proyecto-ECommerce#readme",
   "description": ""
 }
