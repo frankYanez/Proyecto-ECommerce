@@ -57,7 +57,7 @@ function agregarProductosAlCarrito(id) {
 
     if (productoEnCarrito) {
       productoEnCarrito.cantidad++;
-      carritoActualizado()
+      carritoActualizado( )
     }else {
 
       carrito.push(productoEncontrado);
@@ -65,7 +65,7 @@ function agregarProductosAlCarrito(id) {
     
   }
   showProductsCarrito();
-  
+  setLocal(carrito)
 
 }
 
@@ -94,6 +94,7 @@ function showProductsCarrito() {
     carritoProductos.appendChild(div);
   });
 
+  getLocal(carritoProductos)
 
 }
 
@@ -103,6 +104,16 @@ function carritoActualizado() {
   totalPrice.innerText = carrito.reduce((acc,el)=>acc + el.precio,0);
   
 };
+
+function setLocal(item) {
+  const formatJson = JSON.stringify(item)
+
+  localStorage.setItem('item',formatJson)
+}
+
+function getLocal(item) {
+  const formatJson = JSON.parse(localStorage.getItem(item))
+}
 
 
 
