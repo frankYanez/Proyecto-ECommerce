@@ -125,7 +125,7 @@ function getLocal(item) {
 function masVendidos(...objeto) {
   const agregarImagenes = document.getElementById('carritoImagenes');
 
-  agregarImagenes.innerHTML=''
-  const contenedorImages = []
-  agregarImagenes.push(objeto)
+  agregarImagenes.innerHTML='';
+  
+  
 }
