@@ -1,9 +1,9 @@
 const selectProductos = document.getElementById("selectProductos");
 const container = document.getElementById("productos");
 
-const btonDelete = document.getElementsByClassName('button-delete')
+const btonDelete = document.getElementsByClassName("button-delete");
 
-const carrito = JSON.parse(localStorage.getItem('carrito'))||[];
+const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 selectProductos.addEventListener("change", () => {
   selectProductos.value === "Todos"
@@ -15,13 +15,21 @@ selectProductos.addEventListener("change", () => {
       );
 });
 
-showAllProducts(stockProductos);
+let stockProductos = []
+
+fetch('../json/stock.json')
+    .then(respuesta => respuesta.json())
+    .then(data => {
+        stockProductos = [...data];
+
+        showAllProducts(stockProductos);
+    } )
 
 function showAllProducts(array) {
   container.innerHTML = "";
 
   array.forEach((producto) => {
-    const {id,nombre,precio,categoria,img,cantidad} = producto
+    const { id, nombre, precio, categoria, img, cantidad } = producto;
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `<div>
@@ -32,15 +40,12 @@ function showAllProducts(array) {
       <h6>${cantidad}</h6>
       <button class="button buttonComprar" id="${id}" >Comprar</button>
       </div>`;
-      
 
     container.appendChild(div);
 
-    
-
     div.querySelector("button").addEventListener("click", () => {
       agregarProductosAlCarrito(producto.id);
-      comprarToasty()
+      comprarToasty();
     });
   });
 }
@@ -50,19 +55,20 @@ function agregarProductosAlCarrito(id) {
     (producto) => producto.id === id
   );
 
-
   let productoEnCarrito = carrito.find((producto) => producto.id === id);
 
-  productoEnCarrito ? productoEnCarrito.cantidad++ :carrito.push(productoEncontrado);
+  productoEnCarrito
+    ? productoEnCarrito.cantidad++
+    : carrito.push(productoEncontrado);
   showProductsCarrito();
-  
+
   carritoTotal();
-  
+
   setLocal(carrito);
 }
 
 function showProductsCarrito() {
-  const carritoProductos = document.getElementById('carrito');
+  const carritoProductos = document.getElementById("carrito");
 
   carritoProductos.innerHTML = "";
 
@@ -80,24 +86,24 @@ function showProductsCarrito() {
 
     div.querySelector(".button-delete").addEventListener("click", () => {
       deleteProducts(index);
-      
-      
     });
 
     carritoProductos.appendChild(div);
-    masVendidos(producto)
-    
   });
-  
-
 }
+// console.log(index);
+// carrito[index].cantidad--;
+
+// 
 
 function deleteProducts(index) {
   carrito[index].cantidad--;
 
   if (carrito[index].cantidad === 0) {
-    carrito.splice(index, 1);
-  }
+      carrito[index].cantidad = 1
+      carrito.splice(index, 1);
+    }
+  
   showProductsCarrito();
   carritoTotal();
   setLocal(carrito);
@@ -107,63 +113,37 @@ function deleteProducts(index) {
 function carritoTotal() {
   let total = 0;
 
-  carrito.forEach((producto) =>{
-    total += producto.precio * producto.cantidad
-  })
+  carrito.forEach((producto) => {
+    total += producto.precio * producto.cantidad;
+  });
 
-  console.log(total);
+  const t = document.getElementById("total");
 
+  t.innerHTML = `<h5>${total}</h5>`;
 
-  const t = document.getElementById('total');
-
-  t.innerHTML = `<h5>${total}</h5>`
-  
   console.log(total);
 }
 
 function setLocal(carrito) {
-  localStorage.setItem('carrito', JSON.stringify(carrito));
+  localStorage.setItem("carrito", JSON.stringify(carrito));
 }
-
-
-
-
-function masVendidos(objeto) {
-  const agregarImagenes = document.getElementById('carritoImagenes');
-  
-  console.log(objeto.img);
-
-  agregarImagenes.innerHTML = `
-  <img src='${objeto.img}'>`
-
-
-  
-  
-  
-};
-
-// const btonComprar = document.querySelector(".buttonComprar");
-// btonComprar.addEventListener('click',comprarToasty())
-// console.log(btonComprar);
 
 const comprarToasty = () => {
   Toastify({
-    
     text: "Producto Añadido",
-  style: {
-    background: "linear-gradient(to right, #00b09b, #96c93d)"
-  }}).showToast()
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+  }).showToast();
 };
 
 const eliminarToasty = () => {
   Toastify({
-    
     text: "Producto Eliminado",
-  style: {
-    background: "linear-gradient(to right, rgb(150, 2, 0), #fff)"
-  }}).showToast()
-}
+    style: {
+      background: "linear-gradient(to right, rgb(150, 2, 0), #fff)",
+    },
+  }).showToast();
+};
 
-showProductsCarrito()
-
-
+showProductsCarrito();
